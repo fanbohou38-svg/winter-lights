@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>WINTER LIGHTS · 冬夜之光</title>
+  <meta name="description" content="3D 粉色粒子圣诞树互动网站 —— 愿每一束光，都照亮冬日的温柔。" />
+
+  <!-- Google Fonts（唯一外部资源：字体，加载失败自动回退系统衬线体） -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- 字体异步加载：拿不到也不挡首屏（自动回退系统衬线体） -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Noto+Serif+SC:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'" />
+
+  <!-- Three.js 已本地打包进 assets/vendor，不再依赖任何公网 CDN：
+       朋友第一次打开也不会卡在 CDN 探测上 -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./assets/vendor/three/build/three.module.js",
+        "three/addons/": "./assets/vendor/three/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="./js/main.js"></script>
+
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <!-- WebGL 画布 -->
+  <canvas id="stage"></canvas>
+
+  <!-- 顶部标题（不遮挡交互） -->
+  <header class="hero">
+    <h1>WINTER&nbsp;LIGHTS</h1>
+    <p>愿每一束光，都照亮冬日的温柔。</p>
+  </header>
+
+  <!-- 底部悬浮控制栏（玻璃拟态） -->
+  <nav id="panel" aria-label="场景控制">
+    <button id="btn-toggle" class="chip">✨ 粒子绽放</button>
+    <button id="btn-photo" class="chip">📷 上传照片</button>
+    <button id="btn-lights" class="chip">💡 彩灯 · 玫瑰金</button>
+    <button id="btn-snow" class="chip on">❄️ 飘雪 · 开</button>
+    <div id="music-wrap">
+      <button id="btn-music" class="chip">♪ 音乐 · 关</button>
+      <input id="volume" type="range" min="0" max="100" value="70" aria-label="音量" />
+    </div>
+    <button id="btn-music-file" class="chip">🎵 上传音乐</button>
+    <button id="btn-reset" class="chip"> ⟲ 重置视角</button>
+  </nav>
+
+  <!-- 隐藏的照片选择框（multiple，本地处理，不上传服务器） -->
+  <input id="file-photo" type="file" accept="image/*" multiple hidden />
+  <!-- 隐藏的音乐选择框（本地播放，不上传服务器） -->
+  <input id="file-music" type="file" accept="audio/*" hidden />
+
+  <!-- 照片大图预览弹窗（玻璃拟态） -->
+  <div id="photo-modal" aria-label="照片预览">
+    <div class="pm-card">
+      <button id="pm-close" class="pm-btn pm-close" aria-label="关闭">✕</button>
+      <img id="pm-img" alt="照片预览" draggable="false" />
+      <p id="pm-caption"></p>
+      <div class="pm-nav">
+        <button id="pm-prev" class="pm-btn" aria-label="上一张">‹</button>
+        <button id="pm-next" class="pm-btn" aria-label="下一张">›</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 首屏加载遮罩 -->
+  <div id="loading"><span>WINTER LIGHTS</span><i>冬夜之光，正在点亮…</i></div>
+
+  <!-- 操作反馈提示 -->
+  <div id="toast" class="hidden"></div>
+</body>
+</html>
