@@ -147,9 +147,7 @@ const btnMusic = document.getElementById('btn-music');
 music.onError = (msg) => showToast(msg);
 /* 内置默认曲目：《Last Christmas》(Wham!) —— 项目内本地文件，
    点「♪ 音乐」按钮即播放；加载失败自动回退八音盒合成旋律 */
-// 公开部署版不加载版权曲《Last Christmas》（原 README 已标注不可公开传播），
-  // 默认使用 Web Audio 合成的公版八音盒《平安夜》旋律；访客可点「🎵 上传音乐」换自己的音频。
-// music.loadUrl('./assets/audio/last-christmas.mp3');
+music.loadUrl('./assets/audio/last-christmas.mp3');
 controls.bindUI({
   onToggleBloom: (bloomed) => {
     if (bloomed) { particles.bloom(); tree.fold(true); photos.setExplode(true); showToast('粒子绽放 · 化作粉色星云'); }
